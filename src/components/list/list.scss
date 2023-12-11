@@ -1,0 +1,59 @@
+.list {
+  width: 100%;
+  margin-top: 10px;
+
+  .listTitleBox {
+    display: inline-block;
+    position: relative;
+    padding: 5px;
+    background-color: #303037;
+    margin-left: 50px;
+    &::after {
+      border: 20px solid transparent;
+      border-left-color: #303037;
+      content: "";
+      position: absolute;
+      left: 100%;
+      top: 0;
+    }
+
+    .listTitle {
+      display: inline-block;
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+
+  .listWrapper {
+    position: relative;
+    .sliderArrow {
+      width: 50px;
+      height: 100%;
+      background-color: rgb(22, 22, 22, 0.5);
+      color: white;
+      position: absolute;
+      z-index: 99;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      cursor: pointer;
+
+      &.left {
+        left: 0;
+      }
+
+      &.right {
+        right: 0;
+      }
+    }
+    .container {
+      margin-left: 50px;
+      display: flex;
+      margin-top: 10px;
+      width: max-content;
+      transform: translateX(0px);
+      transition: all 1s ease;
+    }
+  }
+}

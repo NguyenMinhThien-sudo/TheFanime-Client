@@ -1,0 +1,125 @@
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #fafafa;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(-45deg, #cb2f4c, #4962d0);
+  border-radius: 50px;
+}
+
+.home {
+  background-color: var(--main-color);
+  color: white;
+  overflow: hidden;
+  animation: home 1s linear infinite;
+
+  @keyframes home {
+    0% {
+      background-image: linear-gradient(0deg, #222225, var(--main-color));
+    }
+    12% {
+      background-image: linear-gradient(45deg, #222225, var(--main-color));
+    }
+    24% {
+      background-image: linear-gradient(95deg, #222225, var(--main-color));
+    }
+    36% {
+      background-image: linear-gradient(145deg, #222225, var(--main-color));
+    }
+    48% {
+      background-image: linear-gradient(195deg, #222225, var(--main-color));
+    }
+    60% {
+      background-image: linear-gradient(245deg, #222225, var(--main-color));
+    }
+    72% {
+      background-image: linear-gradient(295deg, #222225, var(--main-color));
+    }
+    100% {
+      background-image: linear-gradient(360deg, #222225, var(--main-color));
+    }
+  }
+
+  .goToTop {
+    position: fixed;
+    z-index: 10;
+    right: 70px;
+    bottom: 50px;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s linear;
+
+    &:hover {
+      color: rgb(76, 204, 240);
+    }
+
+    .iconGoToTop {
+      font-size: 50px;
+      font-weight: bold;
+    }
+  }
+
+  .listBox {
+    border: 1px solid #2d2b2b;
+    max-height: 541px;
+    overflow: hidden;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #fafafa;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-image: linear-gradient(-45deg, #cb2f4c, #4962d0);
+      border-radius: 50px;
+    }
+  }
+}
+
+//LOADING
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #fff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%,
+  100% {
+    top: 24px;
+    height: 32px;
+  }
+}

@@ -1,0 +1,145 @@
+.commentTitle {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgb(207, 199, 199);
+  .title {
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #303037;
+  }
+}
+.comments {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: black;
+  color: white;
+
+  .commentInput {
+    display: flex;
+    flex-direction: column;
+
+    .textareaComment {
+      padding-top: 10px;
+      padding-left: 10px;
+      border-radius: 5px;
+    }
+    .btnSend {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 30px;
+
+      .spaceSend {
+        width: 90%;
+      }
+      button {
+        width: 10%;
+        height: 40px;
+        background-color: #36aae5;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+  .commentSend {
+    display: flex;
+    width: 50%;
+    margin-top: 20px;
+
+    .userAvata {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 20px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    .commentParent {
+      .commentHeader {
+        font-size: 14px;
+      }
+      .commentContent {
+        padding: 10px;
+      }
+      .commentFooter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+          margin-right: 10px;
+          font-size: 14px;
+          color: #939ea1;
+        }
+        .commentReply {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+
+          .icon {
+            font-size: 18px;
+          }
+        }
+        .iconLike {
+          font-size: 14px;
+          margin-right: 10px;
+          cursor: pointer;
+        }
+        .commentTime {
+          font-size: 13px;
+          color: #a59f9f;
+        }
+        .commentChoosesBox {
+          position: relative;
+          .commentChooses {
+            padding-bottom: 6px;
+            font-size: 16px;
+            cursor: pointer;
+          }
+          .CommentOptions {
+            display: none;
+            background-color: #303037;
+            position: absolute;
+            top: 30px;
+            left: -27px;
+            border-radius: 5px;
+            cursor: pointer;
+            span {
+              padding-top: 10px;
+              padding-left: 20px;
+              padding-bottom: 10px;
+              padding-right: 10px;
+              color: white;
+              &:hover {
+                opacity: 0.75;
+              }
+            }
+          }
+          &:hover {
+            .CommentOptions {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
