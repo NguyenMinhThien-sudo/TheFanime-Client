@@ -7,27 +7,28 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loading from "../loading/Loading";
+import { endpointApi } from "../../Endpoint";
 
-const ListItem = ({ index, item }) => {
+const ListItem = ({ index, item, toastWarn }) => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(false);
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  // const { ToastContainer, toastWarn, user } = WarningToast();
+
   useEffect(() => {
     const getMovie = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(
-          "http://localhost:8800/api/movies/find/" + item,
-          {
-            headers: {
-              token:
-                "Bearer " +
-                JSON.parse(localStorage.getItem("user")).accessToken,
-            },
-          }
-        );
+        const res = await axios.get(`${endpointApi}/api/movies/find/` + item, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
         setMovie(res.data);
         setLoading(false);
       } catch (err) {
@@ -38,7 +39,20 @@ const ListItem = ({ index, item }) => {
     getMovie();
   }, [item]);
   const handleWatchClick = () => {
-    navigate("/movieDetail", { state: { movie } });
+    if (movie && movie._id) {
+      if (!user.vip && movie.isVip) {
+        toastWarn();
+      }
+      if (user.vip && !movie.isVip) {
+        navigate(`/watch/${movie._id}`, { state: { movie } });
+      }
+      if (user.vip && movie.isVip) {
+        navigate(`/watch/${movie._id}`, { state: { movie } });
+      }
+      if (!user.vip && !movie.isVip) {
+        navigate(`/watch/${movie._id}`, { state: { movie } });
+      }
+    }
   };
   return (
     <div
@@ -77,6 +91,17 @@ const ListItem = ({ index, item }) => {
                   <span>{movie.duration}</span>
                   <span className="limit">+{movie.limit}</span>
                   <span>{movie.year}</span>
+                  {movie.isVip && (
+                    <span
+                      style={{
+                        color: "#fcf701",
+                        fontWeight: "bold",
+                        marginLeft: "8px",
+                      }}
+                    >
+                      {user.vip ? "OK" : "VIP"}
+                    </span>
+                  )}
                 </div>
                 <div className="desc">{movie.desc}</div>
                 <div className="genre">{movie.genre}</div>

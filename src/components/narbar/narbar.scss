@@ -87,6 +87,19 @@
       justify-content: center;
       align-items: center;
 
+      .vipOption {
+        font-weight: bold;
+        color: #fcf701;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .unVipOption {
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
       .movieSearch {
         color: white;
         display: flex;
@@ -109,7 +122,7 @@
       .searchResult {
         position: absolute;
         top: 53px;
-        right: 212px;
+        right: 240px;
         width: 375px;
         max-height: 567px;
         overflow: hidden;

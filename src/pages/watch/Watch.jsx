@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./watch.scss";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import PlaylistPlayIcon from "@mui/icons-material/PlaylistPlay";
@@ -13,7 +13,7 @@ import axios from "axios";
 
 const Watch = () => {
   const { state } = useLocation();
-  const movie = state && (state.movie || state.content);
+  const movie = state && (state.movie || state.content || state.favoriteMovie);
 
   const videoRef = useRef(null);
   const navigate = useNavigate();
@@ -134,9 +134,10 @@ const Watch = () => {
   //Similar
   const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
-  const [clickLimit, setClickLimit] = useState(window.innerWidth / 230);
+  // const [clickLimit, setClickLimit] = useState(window.innerWidth / 230);
+  const clickLimit = window.innerWidth / 230;
 
-  console.log(setClickLimit);
+  // console.log(setClickLimit);
 
   const listRef = useRef();
 
@@ -161,11 +162,12 @@ const Watch = () => {
       <Narbar />
       <div className="watchPage">
         <div className="watch">
-          <Link to="/">
-            <div className="back">
-              <ArrowBackOutlinedIcon />
-            </div>
-          </Link>
+          <div
+            className="back"
+            onClick={() => navigate("/movieDetail", { state: { movie } })}
+          >
+            <ArrowBackOutlinedIcon />
+          </div>
           <div className="watchTitle">
             <div className="watchTitleBox">
               <span className="watchTitlePrev">Bạn đang xem: </span>

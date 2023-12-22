@@ -39,6 +39,49 @@ body::-webkit-scrollbar-thumb {
       padding: 25px;
       height: 40%;
 
+      .detailTitle {
+        display: flex;
+        align-items: center;
+
+        .vip {
+          padding: 5px;
+          font-weight: bold;
+          color: black;
+          margin-left: 10px;
+          margin-bottom: 3px;
+          border-radius: 3px;
+          background-color: gold;
+          animation: vip 1s linear infinite;
+
+          @keyframes vip {
+            0% {
+              background: linear-gradient(0deg, #d8ec74, #eaea0c);
+            }
+            12% {
+              background: linear-gradient(45deg, #d8ec74, #eaea0c);
+            }
+            24% {
+              background: linear-gradient(95deg, #d8ec74, #eaea0c);
+            }
+            36% {
+              background: linear-gradient(145deg, #d8ec74, #eaea0c);
+            }
+            48% {
+              background: linear-gradient(195deg, #d8ec74, #eaea0c);
+            }
+            60% {
+              background: linear-gradient(245deg, #d8ec74, #eaea0c);
+            }
+            72% {
+              background: linear-gradient(295deg, #d8ec74, #eaea0c);
+            }
+            100% {
+              background: linear-gradient(360deg, #d8ec74, #eaea0c);
+            }
+          }
+        }
+      }
+
       h1 {
         color: #fff;
         font-weight: 400;

@@ -9,6 +9,7 @@ import { Link, animateScroll as scroll } from "react-scroll";
 import useScrollY from "../../components/hooks/useScrollY";
 import AllMovies from "../../components/allMovies/AllMovies";
 import FootBar from "../../components/footBar/FootBar";
+import { endpointApi } from "../../Endpoint";
 
 const Home = ({ type }) => {
   const [lists, setLists] = useState([]);
@@ -20,7 +21,7 @@ const Home = ({ type }) => {
     const getRandomLists = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8800/api/lists${type ? "?type=" + type : ""}${
+          `${endpointApi}/api/lists${type ? "?type=" + type : ""}${
             genre ? "&genre=" + genre : ""
           }`,
           {
@@ -71,6 +72,12 @@ const Home = ({ type }) => {
         </Link>
       </div>
       <FootBar />
+      <df-messenger
+        intent="WELCOME"
+        chat-title="TheFanime-ChatBot"
+        agent-id="4fec8873-6ab1-483a-8355-96b2c9f27ed3"
+        language-code="vi"
+      ></df-messenger>
     </div>
   );
 };

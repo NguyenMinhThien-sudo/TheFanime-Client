@@ -7,6 +7,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import FootBar from "../../components/footBar/FootBar";
 import { useEffect } from "react";
 import Comments from "../../components/comments/Comments";
+import useWarningToast from "../../components/warningToastHook/useWarningToast";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import useWarningFavorite from "../../components/warningToastHook/useWarningFavorite";
 
 const MovieDetail = () => {
   const navigate = useNavigate();
@@ -14,15 +19,65 @@ const MovieDetail = () => {
   const movie = state && (state.movie || state.content || state.item);
   const movieTitle = movie.title ? movie.title : "The Fanime";
 
-  console.log(movie);
+  const { ToastContainer, toastWarn } = useWarningToast();
+  const { favoriteWarn } = useWarningFavorite();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const favoriteToast = () => {
+    toast.success("🦄 Đã thêm vào danh sách yêu thích!", {
+      position: "top-left",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   useEffect(() => {
     document.title = movieTitle;
   }, [movieTitle]);
 
+  const handleAddToFavorites = async () => {
+    try {
+      if (!user.vip) {
+        favoriteWarn();
+        return;
+      }
+      await axios.post(
+        "http://localhost:8800/api/users/favorites-add",
+        { movieId: movie._id, userId: user._id },
+        {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
+      // console.log(response.data);
+      favoriteToast();
+    } catch (error) {
+      console.error("Error adding to favorites:", error);
+    }
+  };
+
   const handleWatchClick = () => {
     if (movie && movie._id) {
-      navigate(`/watch/${movie._id}`, { state: { movie } });
+      if (!user.vip && movie.isVip) {
+        toastWarn();
+      }
+      if (user.vip && !movie.isVip) {
+        navigate(`/watch/${movie._id}`, { state: { movie } });
+      }
+      if (user.vip && movie.isVip) {
+        navigate(`/watch/${movie._id}`, { state: { movie } });
+      }
+      if (!user.vip && !movie.isVip) {
+        navigate(`/watch/${movie._id}`, { state: { movie } });
+      }
     }
   };
 
@@ -33,10 +88,17 @@ const MovieDetail = () => {
         <div className="info_section">
           <div className="movie_header">
             <img className="locandina" src={movie.img} />
-            <h1>{movie.title}</h1>
+            <div className="detailTitle">
+              <h1>{movie.title}</h1>
+              {movie.isVip && (
+                <div className="vip">
+                  <span className="vipText">{!user.vip ? "VIP" : "OK"}</span>
+                </div>
+              )}
+            </div>
             <h4>
               {movie.year}
-              {movie.isSeries ? ", Series" : ", Movies"}
+              {movie.isSeries ? ", phim bộ" : ", phim rạp"}
             </h4>
             <span className="minutes">
               {movie.isSeries ? "24 phút" : "1 giờ 30 phút"}
@@ -55,7 +117,10 @@ const MovieDetail = () => {
                 <ShareIcon className="material-icons" />
               </li>
               <li>
-                <FavoriteIcon className="material-icons" />
+                <FavoriteIcon
+                  className="material-icons"
+                  onClick={handleAddToFavorites}
+                />
               </li>
             </ul>
           </div>
@@ -66,6 +131,7 @@ const MovieDetail = () => {
       </div>
       <Comments movieID={movie._id} />
       <FootBar />
+      <ToastContainer />
     </>
   );
 };

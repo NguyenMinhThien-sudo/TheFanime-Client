@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./allMovies.scss";
+import { endpointApi } from "../../Endpoint";
 
 const AllMovies = () => {
   const [movies, setMovies] = useState([]);
@@ -10,6 +11,8 @@ const AllMovies = () => {
   const [pageSize] = useState(9);
   const [loading, setLoading] = useState(false);
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,7 +20,7 @@ const AllMovies = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:8800/api/movies/all?page=${currentPage}&pageSize=${pageSize}`
+          `${endpointApi}/api/movies/all?page=${currentPage}&pageSize=${pageSize}`
         );
         const { movies, totalMovies } = response.data;
         setMovies(movies);
@@ -82,8 +85,15 @@ const AllMovies = () => {
               )}
               {!loading && (
                 <>
-                  <div className="allItemEps">
-                    <span>{movie.isSeries ? "63/104" : "FULL"}</span>
+                  <div
+                    className="allItemEps"
+                    style={{ backgroundColor: movie.isVip && "#f0bd07" }}
+                  >
+                    {movie.isVip ? (
+                      <span>{user.vip ? "OK" : "VIP"}</span>
+                    ) : (
+                      <span>{movie.isSeries ? "63/104" : "FULL"}</span>
+                    )}
                   </div>
                   <div className="allItemImg">
                     <img src={movie.img} alt="" />

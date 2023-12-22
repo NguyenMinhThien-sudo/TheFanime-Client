@@ -4,18 +4,24 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useWarningToast from "../warningToastHook/useWarningToast";
+import { endpointApi } from "../../Endpoint";
 
 const Featured = ({ type, setGenre }) => {
   const [content, setContent] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const { ToastContainer, toastWarn } = useWarningToast();
+
   useEffect(() => {
     const getRandomContent = async () => {
       try {
         setLoading(true);
         const res = await axios.get(
-          `http://localhost:8800/api/movies/random?type=${type}`,
+          `${endpointApi}/api/movies/random?type=${type}`,
           {
             headers: {
               token:
@@ -36,7 +42,18 @@ const Featured = ({ type, setGenre }) => {
 
   const handleWatchClick = () => {
     if (content && content._id) {
-      navigate(`/watch/${content._id}`, { state: { content } });
+      if (!user.vip && content.isVip) {
+        toastWarn();
+      }
+      if (user.vip && !content.isVip) {
+        navigate(`/watch/${content._id}`, { state: { content } });
+      }
+      if (user.vip && content.isVip) {
+        navigate(`/watch/${content._id}`, { state: { content } });
+      }
+      if (!user.vip && !content.isVip) {
+        navigate(`/watch/${content._id}`, { state: { content } });
+      }
     }
   };
 
@@ -69,7 +86,14 @@ const Featured = ({ type, setGenre }) => {
       {loading && <div className="lds-hourglass"></div>}
       {!loading && <img src={content && content.imgSm} alt="" />}
       <div className="info">
-        <span className="imgTitle">{content && content.imgTitle}</span>
+        <div className="infoHead">
+          <span className="imgTitle">{content && content.imgTitle}</span>
+          {content.isVip && (
+            <div className="vip">
+              <span className="vipText">{!user.vip ? "VIP" : "OK"}</span>
+            </div>
+          )}
+        </div>
         <div className="boxDesc">
           <span className="desc">{content && content.desc}</span>
         </div>
@@ -84,6 +108,7 @@ const Featured = ({ type, setGenre }) => {
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

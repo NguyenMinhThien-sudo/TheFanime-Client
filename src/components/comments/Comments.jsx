@@ -105,18 +105,30 @@ const Comments = ({ movieID }) => {
         {comments.map((comment) => (
           <div className="commentSend" key={comment._id}>
             <div className="userAvata">
-              <img src={comment.userId.profilePic} alt="" />
+              <img
+                src={
+                  comment.userId.profilePic
+                    ? comment.userId.profilePic
+                    : "/images/client_avatar.jpg"
+                }
+                alt=""
+              />
             </div>
             <div className="commentParent">
               <div className="commentHeader">
                 <span
                   className="username"
                   style={{
-                    color: comment.userId.isAdmin ? "#f25959" : "#57b0b9",
+                    color: comment.userId.isAdmin
+                      ? "#f25959"
+                      : comment.userId.vip
+                      ? "#fcf701"
+                      : "#57b0b9",
                     fontWeight: comment.userId.isAdmin ? "bold" : "normal",
                   }}
                 >
                   {comment.userId.username}
+                  {comment.userId.vip && !comment.userId.isAdmin && " (VIP)"}
                   {comment.userId.isAdmin ? " (Quản Trị Viên)" : ""}
                 </span>
               </div>
@@ -136,7 +148,15 @@ const Comments = ({ movieID }) => {
                     </span>
                   </div>
                 </div>
-                <span className="commentTime">3 giờ trước</span>
+                <span className="commentTime">
+                  {comment.userId.isAdmin && "1 phút trước"}
+                  {comment.userId.vip &&
+                    !comment.userId.isAdmin &&
+                    "2 giờ trước"}
+                  {!comment.userId.isAdmin &&
+                    !comment.userId.vip &&
+                    "3 ngày trước"}
+                </span>
               </div>
             </div>
           </div>

@@ -51,6 +51,49 @@
     flex-direction: column;
     z-index: 1;
 
+    .infoHead {
+      display: flex;
+      align-items: center;
+
+      .vip {
+        padding: 5px;
+        font-weight: bold;
+        color: black;
+        margin-left: 10px;
+        margin-bottom: 3px;
+        border-radius: 3px;
+        background-color: gold;
+        animation: vip 1s linear infinite;
+
+        @keyframes vip {
+          0% {
+            background: linear-gradient(0deg, #d4eb64, #fcf701);
+          }
+          12% {
+            background: linear-gradient(45deg, #d4eb64, #fcf701);
+          }
+          24% {
+            background: linear-gradient(95deg, #d4eb64, #fcf701);
+          }
+          36% {
+            background: linear-gradient(145deg, #d4eb64, #fcf701);
+          }
+          48% {
+            background: linear-gradient(195deg, #d4eb64, #fcf701);
+          }
+          60% {
+            background: linear-gradient(245deg, #d4eb64, #fcf701);
+          }
+          72% {
+            background: linear-gradient(295deg, #d4eb64, #fcf701);
+          }
+          100% {
+            background: linear-gradient(360deg, #d4eb64, #fcf701);
+          }
+        }
+      }
+    }
+
     .imgTitle {
       font-size: 36px;
       font-weight: bold;

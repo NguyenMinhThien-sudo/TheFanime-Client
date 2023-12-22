@@ -1,0 +1,50 @@
+body {
+  background-color: #222225;
+}
+
+.paypalBtnCheckout {
+  padding: 10px;
+  margin-top: 30px;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 1px 20px 0 rgb(126, 125, 125);
+  margin-left: 500px;
+  max-width: 500px;
+
+  h1 {
+    font-weight: bold;
+    font-size: 30px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: paypal 1s linear infinite;
+
+    @keyframes paypal {
+      0% {
+        background-image: linear-gradient(0deg, blue, red);
+      }
+      12% {
+        background-image: linear-gradient(45deg, blue, red);
+      }
+      24% {
+        background-image: linear-gradient(95deg, blue, red);
+      }
+      36% {
+        background-image: linear-gradient(145deg, blue, red);
+      }
+      48% {
+        background-image: linear-gradient(195deg, blue, red);
+      }
+      60% {
+        background-image: linear-gradient(245deg, blue, red);
+      }
+      72% {
+        background-image: linear-gradient(295deg, blue, red);
+      }
+      100% {
+        background-image: linear-gradient(360deg, blue, red);
+      }
+    }
+  }
+}

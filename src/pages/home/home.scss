@@ -47,7 +47,7 @@ body::-webkit-scrollbar-thumb {
   .goToTop {
     position: fixed;
     z-index: 10;
-    right: 70px;
+    left: 70px;
     bottom: 50px;
     color: rgba(255, 255, 255, 0.4);
     cursor: pointer;

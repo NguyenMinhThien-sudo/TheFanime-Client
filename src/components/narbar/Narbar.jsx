@@ -9,17 +9,23 @@ import { logout } from "../../authContext/AuthActions";
 import axios from "axios";
 import { Link } from "react-scroll";
 import useScrollY from "../hooks/useScrollY";
+import { endpointApi } from "../../Endpoint";
+import useWarningFavorite from "../warningToastHook/useWarningFavorite";
 
 const Narbar = () => {
   const [isInputVisible, setInputVisible] = useState(false);
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
   const [endpoint, setEndpoint] = useState(
-    `http://localhost:8800/api/movies/search?title=${query}`
+    `${endpointApi}/api/movies/search?title=${query}`
   );
   const [loading, setLoading] = useState(false);
   const { dispatch } = useContext(AuthContext);
   const [activeItem, setActiveItem] = useState("");
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const { ToastContainer, favoriteWarn } = useWarningFavorite();
 
   const [scrollY] = useScrollY();
   const navigate = useNavigate();
@@ -142,7 +148,14 @@ const Narbar = () => {
           </Link>
           <span
             className={`${activeItem === "favorite" ? "isActive" : ""}`}
-            onClick={() => handleMenuClick("favorite")}
+            onClick={() => {
+              if (!user.vip) {
+                favoriteWarn();
+                return;
+              }
+              navigate(`/favorite/${user._id}`, { state: user._id });
+              handleMenuClick("favorite");
+            }}
           >
             Yêu Thích
           </span>
@@ -151,9 +164,7 @@ const Narbar = () => {
           <div className="movieSearch">
             <button
               onClick={() =>
-                setEndpoint(
-                  `http://localhost:8800/api/movies/search?title=${query}`
-                )
+                setEndpoint(`${endpointApi}/api/movies/search?title=${query}`)
               }
               className="btnSearch"
               style={{
@@ -233,8 +244,19 @@ const Narbar = () => {
               onClick={handleIconClick}
             />
           </div>
+          <span
+            className={user.vip ? "vipOption" : "unVipOption"}
+            onClick={() => navigate("/paypalCheckout")}
+          >
+            VIP
+          </span>
           <NotificationsIcon className="icon" />
-          <img src="/images/client_avatar.jpg" alt="" />
+          <img
+            src={
+              user.profilePic ? user.profilePic : "/images/client_avatar.jpg"
+            }
+            alt=""
+          />
           <div className="profile">
             <ArrowDropDownIcon className="icon" />
             <div className="options">
@@ -244,6 +266,7 @@ const Narbar = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

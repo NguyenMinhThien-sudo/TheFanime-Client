@@ -3,13 +3,17 @@ import ArrowBackIosOutlinedIcon from "@mui/icons-material/ArrowBackIosOutlined";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import "./list.scss";
 import ListItem from "../listItem/ListItem";
+import useWarningToast from "../warningToastHook/useWarningToast";
 
 const List = ({ list }) => {
   const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
-  const [clickLimit, setClickLimit] = useState(window.innerWidth / 230);
+  // const [clickLimit, setClickLimit] = useState(window.innerWidth / 230);
+  const clickLimit = window.innerWidth / 230;
 
-  console.log(setClickLimit);
+  const { ToastContainer, toastWarn } = useWarningToast();
+
+  // console.log(setClickLimit);
 
   const listRef = useRef();
 
@@ -42,7 +46,12 @@ const List = ({ list }) => {
         />
         <div className="container" ref={listRef}>
           {list.content.map((item, index) => (
-            <ListItem key={index} index={index} item={item} />
+            <ListItem
+              key={index}
+              index={index}
+              item={item}
+              toastWarn={toastWarn}
+            />
           ))}
         </div>
         <ArrowForwardIosOutlinedIcon
@@ -50,6 +59,7 @@ const List = ({ list }) => {
           onClick={() => handleClick("right")}
         />
       </div>
+      <ToastContainer />
     </div>
   );
 };
