@@ -23,6 +23,7 @@
   .commentInput {
     display: flex;
     flex-direction: column;
+    // width: 800px;
 
     .textareaComment {
       padding-top: 10px;
@@ -38,7 +39,7 @@
       .spaceSend {
         width: 90%;
       }
-      button {
+      .sendBtn {
         width: 10%;
         height: 40px;
         background-color: #36aae5;
@@ -47,11 +48,25 @@
         font-weight: bold;
         border-radius: 5px;
         cursor: pointer;
+        transition: 0.3s ease-in;
+
+        &:hover {
+          border-bottom: 5px solid #36aae5;
+          border-right: 5px solid #36aae5;
+          background-color: white;
+          color: #36aae5;
+        }
+        &:active {
+          border-bottom: 1px solid #36aae5;
+          border-right: 1px solid #36aae5;
+        }
       }
     }
   }
+
   .commentSend {
     display: flex;
+    // flex-direction: column;
     width: 50%;
     margin-top: 20px;
 
@@ -70,6 +85,52 @@
     }
 
     .commentParent {
+      .saveBtn {
+        width: 10%;
+        height: 40px;
+        background-color: #36aae5;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s ease-in;
+
+        &:hover {
+          border-bottom: 5px solid #36aae5;
+          border-right: 5px solid #36aae5;
+          background-color: white;
+          color: #36aae5;
+        }
+        &:active {
+          border-bottom: 1px solid #36aae5;
+          border-right: 1px solid #36aae5;
+        }
+      }
+
+      .cancleBtn {
+        width: 10%;
+        height: 40px;
+        background-color: #ed135d;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s ease-in;
+
+        &:hover {
+          border-bottom: 5px solid #ed135d;
+          border-right: 5px solid #ed135d;
+          background-color: white;
+          color: #ed135d;
+        }
+        &:active {
+          border-bottom: 1px solid #ed135d;
+          border-right: 1px solid #ed135d;
+        }
+      }
+
       .commentHeader {
         font-size: 14px;
       }
@@ -78,7 +139,7 @@
       }
       .commentFooter {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         span {
           margin-right: 10px;
@@ -115,7 +176,7 @@
             display: none;
             background-color: #303037;
             position: absolute;
-            top: 30px;
+            top: 20px;
             left: -27px;
             border-radius: 5px;
             cursor: pointer;
@@ -126,7 +187,7 @@
               padding-right: 10px;
               color: white;
               &:hover {
-                opacity: 0.75;
+                opacity: 0.5;
               }
             }
           }

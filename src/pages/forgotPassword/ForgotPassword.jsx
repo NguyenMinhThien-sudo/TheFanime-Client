@@ -2,6 +2,7 @@ import "./forgotPassword.scss";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { endpointApi } from "../../Endpoint";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ const ForgotPassword = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8800/api/users/forgot-password",
+        `${endpointApi}/api/users/forgot-password`,
         { email }
       );
 
@@ -36,20 +37,6 @@ const ForgotPassword = () => {
   };
 
   return (
-    // <div>
-    //   <h1>Quên Mật Khẩu</h1>
-    //   {success && <p style={{ color: "green" }}>{success}</p>}
-    //   {error && <p style={{ color: "red" }}>{error}</p>}
-    //   <form>
-    //     <input
-    //       type="email"
-    //       placeholder="Email"
-    //       onChange={(e) => setEmail(e.target.value)}
-    //       required
-    //     />
-    //     <button onClick={handleForgotPassword}>Gửi yêu cầu</button>
-    //   </form>
-    // </div>
     <div className="login">
       <div className="top">
         <div className="wrapper">
@@ -69,7 +56,9 @@ const ForgotPassword = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <button onClick={handleForgotPassword}>Gửi yêu cầu</button>
+          <button className="forgotBtn" onClick={handleForgotPassword}>
+            Gửi yêu cầu
+          </button>
           <span
             onClick={() => navigate("/login")}
             style={{

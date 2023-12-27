@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import "./register.scss";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { endpointApi } from "../../Endpoint";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ const Register = () => {
     setPassword(passwordRef.current.value);
     setUsername(usernameRef.current.value);
     try {
-      await axios.post("http://localhost:8800/api/auth/register", {
+      await axios.post(`${endpointApi}/api/auth/register`, {
         email,
         username,
         password,
@@ -48,15 +49,15 @@ const Register = () => {
         <p>Bạn đã sẵn sàng chưa?</p>
         {!email ? (
           <div className="input">
-            <input type="email" placeholder="email address" ref={emailRef} />
+            <input type="email" placeholder="Email" ref={emailRef} />
             <button className="registerButton" onClick={handleStart}>
               Sẵn Sàng
             </button>
           </div>
         ) : (
           <form className="input">
-            <input type="username" placeholder="username" ref={usernameRef} />
-            <input type="password" placeholder="password" ref={passwordRef} />
+            <input type="username" placeholder="Username" ref={usernameRef} />
+            <input type="password" placeholder="Password" ref={passwordRef} />
             <button className="registerButton" onClick={handleFinish}>
               Bắt Đầu
             </button>

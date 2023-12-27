@@ -2,6 +2,8 @@ import "./narbar.scss";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../authContext/AuthContext";
@@ -70,6 +72,14 @@ const Narbar = () => {
 
   const handleMenuClick = (item) => {
     setActiveItem(item);
+  };
+
+  const handleClickPaypal = () => {
+    if (user.vip) {
+      window.alert("Bạn hiện đã là thành viên VIP!");
+      return;
+    }
+    navigate("/paypalCheckout");
   };
 
   const handleLogout = () => {
@@ -169,20 +179,12 @@ const Narbar = () => {
               className="btnSearch"
               style={{
                 opacity: isInputVisible ? "1" : "0",
-                marginRight: "5px",
-                padding: "5px",
-                width: "50px",
-                border: "none",
-                borderRadius: "5px",
-                backgroundColor: "rgb(255, 0, 102)",
-                color: "white",
-                fontWeight: "bold",
-                cursor: "pointer",
               }}
             >
               Tìm
             </button>
             <input
+              className="inputSearch"
               type="text"
               placeholder="Tìm phim..."
               onChange={handleInputChange}
@@ -246,7 +248,7 @@ const Narbar = () => {
           </div>
           <span
             className={user.vip ? "vipOption" : "unVipOption"}
-            onClick={() => navigate("/paypalCheckout")}
+            onClick={handleClickPaypal}
           >
             VIP
           </span>
@@ -256,12 +258,19 @@ const Narbar = () => {
               user.profilePic ? user.profilePic : "/images/client_avatar.jpg"
             }
             alt=""
+            onClick={() => navigate("/personal")}
           />
           <div className="profile">
             <ArrowDropDownIcon className="icon" />
             <div className="options">
-              <span>Thiết lập</span>
-              <span onClick={handleLogout}>Đăng xuất</span>
+              <div className="option">
+                <AccountCircleIcon className="iconOption" />
+                <span onClick={() => navigate("/personal")}>Cá nhân</span>
+              </div>
+              <div className="option">
+                <ExitToAppIcon className="iconOption" />
+                <span onClick={handleLogout}>Đăng xuất</span>
+              </div>
             </div>
           </div>
         </div>

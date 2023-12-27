@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { AuthContext } from "../../authContext/AuthContext";
 import { logout } from "../../authContext/AuthActions";
+import { endpointApi } from "../../Endpoint";
 
 const PaypalCheckout = () => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const PaypalCheckout = () => {
   const updateUserVipStatus = async (userId) => {
     try {
       const response = await fetch(
-        `http://localhost:8800/api/users/updateVip/${userId}`,
+        `${endpointApi}/api/users/updateVip/${userId}`,
         {
           method: "POST",
           headers: {
@@ -64,7 +65,7 @@ const PaypalCheckout = () => {
   };
 
   const createOrder = async () => {
-    return await fetch("http://localhost:8800/api/paypal/payment/orders", {
+    return await fetch(`${endpointApi}/api/paypal/payment/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +82,7 @@ const PaypalCheckout = () => {
   };
   const onApprove = async (data) => {
     return await fetch(
-      `http://localhost:8800/api/paypal/payment/orders/${data.orderID}/capture`,
+      `${endpointApi}/api/paypal/payment/orders/${data.orderID}/capture`,
       {
         method: "POST",
         headers: {

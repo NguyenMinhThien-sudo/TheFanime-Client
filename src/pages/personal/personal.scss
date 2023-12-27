@@ -1,0 +1,68 @@
+.personal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding-top: 100px;
+
+  .personalBox {
+    position: relative;
+    background-color: #303037;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    height: 100vh;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    margin-bottom: 50px;
+    .backBtn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #adadc9;
+      cursor: pointer;
+      transition: 0.5s ease-in;
+
+      &:hover {
+        background-color: #ef325b;
+        padding: 10px;
+        border-radius: 5px;
+        color: white;
+      }
+    }
+    .personalImg {
+      width: 200px;
+      height: 200px;
+      border: 2px solid white;
+      border-radius: 50%;
+      margin-top: 20px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+
+    .personalBody {
+      background-color: #1b1b1f;
+      width: 700px;
+      margin-top: 30px;
+      padding-top: 50px;
+      padding-left: 20px;
+      line-height: line;
+      border: 3px solid #686363;
+      border-radius: 5px;
+      .personalItem {
+        margin-bottom: 50px;
+        span {
+          color: gold;
+        }
+      }
+    }
+  }
+}

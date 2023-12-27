@@ -58,11 +58,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button
-            className="loginButton"
-            style={{ backgroundColor: "rgb(255, 0, 102)" }}
-            onClick={handleLogin}
-          >
+          <button className="loginButton" onClick={handleLogin}>
             Đăng nhập
           </button>
           <span>

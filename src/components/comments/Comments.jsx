@@ -4,6 +4,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import EditComment from "../editComment/EditComment";
+import { endpointApi } from "../../Endpoint";
 
 const Comments = ({ movieID }) => {
   const [commentText, setCommentText] = useState("");
@@ -19,7 +20,7 @@ const Comments = ({ movieID }) => {
       }
 
       const response = await axios.post(
-        "http://localhost:8800/api/comments/",
+        `${endpointApi}/api/comments/`,
         {
           userId: user._id,
           movieId: movieID,
@@ -46,7 +47,7 @@ const Comments = ({ movieID }) => {
     );
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:8800/api/comments/${commentId}`, {
+        await axios.delete(`${endpointApi}/api/comments/${commentId}`, {
           headers: {
             Authorization: `Bearer ${user.accessToken}`,
           },
@@ -70,7 +71,7 @@ const Comments = ({ movieID }) => {
     const fetchComments = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8800/api/comments/${movieID}`
+          `${endpointApi}/api/comments/${movieID}`
         );
         setComments(response.data);
       } catch (error) {
@@ -99,7 +100,9 @@ const Comments = ({ movieID }) => {
           ></textarea>
           <div className="btnSend">
             <div className="spaceSend"></div>
-            <button onClick={handleCommentSubmit}>Gửi</button>
+            <button className="sendBtn" onClick={handleCommentSubmit}>
+              Gửi
+            </button>
           </div>
         </div>
         {comments.map((comment) => (
@@ -158,23 +161,25 @@ const Comments = ({ movieID }) => {
                     "3 ngày trước"}
                 </span>
               </div>
+              {editingComment && editingComment._id === comment._id && (
+                <EditComment
+                  comment={editingComment}
+                  onUpdate={(updatedComment) => {
+                    setComments((prevComments) =>
+                      prevComments.map((comment) =>
+                        comment._id === updatedComment._id
+                          ? updatedComment
+                          : comment
+                      )
+                    );
+                    setEditingComment(null);
+                  }}
+                  onCancel={handleCancelEdit}
+                />
+              )}
             </div>
           </div>
         ))}
-        {editingComment && (
-          <EditComment
-            comment={editingComment}
-            onUpdate={(updatedComment) => {
-              setComments((prevComments) =>
-                prevComments.map((comment) =>
-                  comment._id === updatedComment._id ? updatedComment : comment
-                )
-              );
-              setEditingComment(null);
-            }}
-            onCancel={handleCancelEdit}
-          />
-        )}
       </div>
     </>
   );

@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // height: 100px;
   border-top: 1px solid rgb(207, 199, 199);
   background-color: black;
 
@@ -11,8 +10,12 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px 80px;
+    border-left: 1px solid #545151;
+    border-right: 1px solid #545151;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    line-height: 25px;
 
     .footTitle {
       font-size: 18px;
@@ -73,7 +76,7 @@
 
   .footIcons {
     color: white;
-    margin-right: 20px;
+    margin-right: 80px;
 
     .footIcon {
       width: 50px;

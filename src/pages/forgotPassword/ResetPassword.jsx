@@ -2,6 +2,7 @@ import "./resetPassword.scss";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { endpointApi } from "../../Endpoint";
 
 const ResetPassword = () => {
   const { state } = useLocation();
@@ -10,7 +11,6 @@ const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  // const { email } = useParams();
   const navigate = useNavigate();
 
   const handleResetPassword = async (e) => {
@@ -23,7 +23,7 @@ const ResetPassword = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8800/api/users/reset-password",
+        `${endpointApi}/api/users/reset-password`,
         {
           email,
           password,
@@ -45,27 +45,6 @@ const ResetPassword = () => {
   };
 
   return (
-    // <div>
-    //   <h1>Đặt Lại Mật Khẩu</h1>
-    //   {success && <p style={{ color: "green" }}>{success}</p>}
-    //   {error && <p style={{ color: "red" }}>{error}</p>}
-    //   <form>
-    //     <input
-    //       type="password"
-    //       placeholder="Mật khẩu mới"
-    //       onChange={(e) => setPassword(e.target.value)}
-    //       required
-    //     />
-    //     <input
-    //       type="password"
-    //       placeholder="Xác nhận mật khẩu mới"
-    //       onChange={(e) => setConfirmPassword(e.target.value)}
-    //       required
-    //     />
-    //     <button onClick={handleResetPassword}>Đặt lại mật khẩu</button>
-    //   </form>
-    // </div>
-
     <div className="login">
       <div className="top">
         <div className="wrapper">
@@ -91,10 +70,7 @@ const ResetPassword = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-          <button
-            style={{ backgroundColor: "#23c832" }}
-            onClick={handleResetPassword}
-          >
+          <button className="resetBtn" onClick={handleResetPassword}>
             Đặt lại mật khẩu
           </button>
           <span

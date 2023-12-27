@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import useWarningFavorite from "../../components/warningToastHook/useWarningFavorite";
+import { endpointApi } from "../../Endpoint";
 
 const MovieDetail = () => {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ const MovieDetail = () => {
         return;
       }
       await axios.post(
-        "http://localhost:8800/api/users/favorites-add",
+        `${endpointApi}/api/users/favorites-add`,
         { movieId: movie._id, userId: user._id },
         {
           headers: {
@@ -57,7 +58,7 @@ const MovieDetail = () => {
           },
         }
       );
-      // console.log(response.data);
+
       favoriteToast();
     } catch (error) {
       console.error("Error adding to favorites:", error);

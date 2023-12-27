@@ -10,6 +10,7 @@ import FootBar from "../../components/footBar/FootBar";
 import Comments from "../../components/comments/Comments";
 import SimilarMovies from "../../components/similarMovies/SimilarMovies";
 import axios from "axios";
+import { endpointApi } from "../../Endpoint";
 
 const Watch = () => {
   const { state } = useLocation();
@@ -32,7 +33,7 @@ const Watch = () => {
     const getMovie = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8800/api/movies/similar/${movie._id}`,
+          `${endpointApi}/api/movies/similar/${movie._id}`,
           {
             headers: {
               token:

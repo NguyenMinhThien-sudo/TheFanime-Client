@@ -1,1 +1,1 @@
-export const endpointApi = "http://localhost:8800";
+export const endpointApi = "https://the-fanime-api.vercel.app";

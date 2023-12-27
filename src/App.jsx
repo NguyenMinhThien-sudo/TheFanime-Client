@@ -16,6 +16,7 @@ import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 import ResetPassword from "./pages/forgotPassword/ResetPassword";
 import PaypalCheckout from "./components/paypalCheckout/PaypalCheckout";
 import FavoriteMovies from "./pages/favoriteMovies/FavoriteMovies";
+import Personal from "./pages/personal/Personal";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -43,6 +44,7 @@ function App() {
             <Route path="/movies" element={<Home type="movies" />} />
             <Route path="/series" element={<Home type="series" />} />
             <Route path="/movieDetail" element={<MovieDetail />} />
+            <Route path="/personal" element={<Personal />} />
             <Route path="/favorite/:userId" element={<FavoriteMovies />} />
             <Route path="/watch/:movieId" element={<Watch />} />
             <Route path="/paypalCheckout" element={<PaypalCheckout />} />

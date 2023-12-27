@@ -7,6 +7,7 @@ import FootBar from "../../components/footBar/FootBar";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { endpointApi } from "../../Endpoint";
 
 const FavoriteMovies = () => {
   const [favoritesMovie, setFavoritesMovie] = useState([]);
@@ -32,7 +33,7 @@ const FavoriteMovies = () => {
     const fetchFavorites = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8800/api/users/favorites/${id}`,
+          `${endpointApi}/api/users/favorites/${id}`,
           {
             params: { id },
             headers: {
@@ -54,7 +55,7 @@ const FavoriteMovies = () => {
   const handleRemoveFavorites = async (userId, movieId) => {
     try {
       await axios.post(
-        "http://localhost:8800/api/users/favorites-remove",
+        `${endpointApi}/api/users/favorites-remove`,
         {
           userId: userId,
           movieId: movieId,

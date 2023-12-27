@@ -33,6 +33,16 @@
         font-size: 16px;
         font-weight: 500;
         cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          border-bottom: 4px solid red;
+          color: red;
+          background-color: white;
+        }
+        &:active {
+          border-bottom: 1px solid red;
+        }
       }
     }
   }
@@ -87,6 +97,15 @@
         color: white;
         font-size: 22px;
         cursor: pointer;
+        transition: 0.5s ease;
+        &:hover {
+          background-color: rgb(82, 174, 213);
+          font-weight: bold;
+        }
+        &:active {
+          background-color: rgb(82, 174, 213);
+          transform: scale(1.1);
+        }
       }
     }
   }

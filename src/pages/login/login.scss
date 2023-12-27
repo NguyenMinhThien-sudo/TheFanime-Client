@@ -60,11 +60,11 @@
         }
       }
 
-      button {
+      .loginButton {
         height: 50px;
         border-radius: 5px;
-        // background-color: rgb(255, 0, 102);
         color: white;
+        background-color: rgb(255, 0, 102);
         border: none;
         font-size: 18px;
         font-weight: 500;
@@ -72,9 +72,18 @@
         margin-left: 2px;
         margin-bottom: 3px;
         cursor: pointer;
+        transition: 0.3s ease-in;
 
+        &:hover {
+          border-bottom: 7px solid rgb(255, 0, 102);
+          border-right: 7px solid rgb(255, 0, 102);
+          font-weight: bold;
+          color: rgb(255, 0, 102);
+          background-color: white;
+        }
         &:active {
-          background-color: rgb(45, 39, 172);
+          border-bottom: 1px solid rgb(255, 0, 102);
+          border-right: 1px solid rgb(255, 0, 102);
         }
       }
 

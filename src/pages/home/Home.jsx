@@ -17,6 +17,8 @@ const Home = ({ type }) => {
 
   const [scrollY] = useScrollY();
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   useEffect(() => {
     const getRandomLists = async () => {
       try {
@@ -72,12 +74,14 @@ const Home = ({ type }) => {
         </Link>
       </div>
       <FootBar />
-      <df-messenger
-        intent="WELCOME"
-        chat-title="TheFanime-ChatBot"
-        agent-id="4fec8873-6ab1-483a-8355-96b2c9f27ed3"
-        language-code="vi"
-      ></df-messenger>
+      {user.vip && (
+        <df-messenger
+          intent="WELCOME"
+          chat-title="TheFanime-ChatBot"
+          agent-id="4fec8873-6ab1-483a-8355-96b2c9f27ed3"
+          language-code="vi"
+        ></df-messenger>
+      )}
     </div>
   );
 };
